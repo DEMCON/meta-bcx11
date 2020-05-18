@@ -1,0 +1,1 @@
+SUBSYSTEM=="i2c", ATTR{name}=="INBC0000:00", RUN:="/bin/sh -c 'echo pca9555 0x20 > /sys/bus/i2c/devices/i2c-0/new_device'"

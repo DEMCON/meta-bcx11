@@ -1,0 +1,33 @@
+From acfa207d3c65fc2f97a55237ddccb2344cdb9900 Mon Sep 17 00:00:00 2001
+From: Beralt Meppelink <beralt.meppelink@demcon.nl>
+Date: Mon, 4 Jan 2021 12:21:00 +0100
+Subject: [PATCH] ASoC: Intel: cht_bsw_rt5645: add quirk for SSP0/AIF1 routing
+ on BCX11 boards
+
+The BCX11 board from avalue uses the SSP0/AIF1 route for audio. This patch
+adds that route based on data from DMI.
+
+Signed-off-by: Beralt Meppelink <beralt.meppelink@demcon.nl>
+---
+ sound/soc/intel/boards/cht_bsw_rt5645.c | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+diff --git a/sound/soc/intel/boards/cht_bsw_rt5645.c b/sound/soc/intel/boards/cht_bsw_rt5645.c
+index c68a5b85a4a0..2b43681d9da3 100644
+--- a/sound/soc/intel/boards/cht_bsw_rt5645.c
++++ b/sound/soc/intel/boards/cht_bsw_rt5645.c
+@@ -244,6 +244,14 @@ static const struct dmi_system_id cht_rt5645_quirk_table[] = {
+ 		},
+ 		.driver_data = (void *)CHT_RT5645_PMC_PLT_CLK_0,
+ 	},
++	{
++		/* BCX11 from avalue */
++		.callback = cht_rt5645_quirk_cb,
++		.matches = {
++			DMI_MATCH(DMI_BOARD_NAME, "BCX11"),
++		},
++		.driver_data = (void *)CHT_RT5645_SSP0_AIF1,
++	},
+ 	{
+ 	},
+ };

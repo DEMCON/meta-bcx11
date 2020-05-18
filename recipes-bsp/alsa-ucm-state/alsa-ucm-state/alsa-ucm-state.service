@@ -1,0 +1,11 @@
+[Unit]
+Description=Configure alsa mixer controls using alsa UCM
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/alsaucm -n -b /etc/alsa/alsa-ucm-state.conf
+RemainAfterExit=true
+StandardOutput=journal
+
+[Install]
+WantedBy=sound.target
